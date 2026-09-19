@@ -4,6 +4,14 @@ iPhone-first PWA plus FastAPI backend that estimates whether a cosmetic product 
 
 Results are **estimates for educational guidance**, not medical, regulatory, or manufacturer-certified conclusions.
 
+The backend analyzes product details and returns:
+
+- Estimated expiration dates (opened and unopened)
+- Structured risk classification
+- Recommended action
+- Confidence scoring
+- Latency and cache metadata
+
 ---
 
 ## What you can do
@@ -19,13 +27,17 @@ Results are **estimates for educational guidance**, not medical, regulatory, or 
 ## Project layout
 
 ```text
-cosmetic-safety/
+cosmetic-safety-intelligence-api/
 ├── app/                 # FastAPI backend
 ├── frontend/            # React + Vite PWA
 ├── docs/                # API contract and architecture
 ├── tests/               # Backend tests
 └── eval/                # Small evaluation script
 ```
+
+Client → FastAPI → Validation → Cache → LLM Adapter (optional) → Post-processing → Response
+
+See `/docs/architecture.md` for details.
 
 ---
 
@@ -75,6 +87,27 @@ Content-Type: application/json
     "sun_exposure": "low"
   },
   "photo_base64": null
+}
+```
+
+Example response:
+
+```json
+{
+  "unopened_estimated_expiration_date": "2027-09-01",
+  "opened_estimated_expiration_date": "2026-02-10",
+  "risk_level": "medium",
+  "recommended_action": "Replace soon; avoid use if smell or texture has changed.",
+  "reasoning_summary": [
+    "Liquid foundations typically last 6–12 months after opening.",
+    "High humidity storage increases contamination risk."
+  ],
+  "confidence_score": 0.72,
+  "metadata": {
+    "cache_hit": false,
+    "model": "gpt-4.1-mini",
+    "latency_ms": 842
+  }
 }
 ```
 
@@ -143,3 +176,5 @@ npm run build
 - Check packaging and manufacturer instructions.
 - Do not use a product if the smell, texture, color, or packaging has changed.
 - This app does not diagnose skin conditions.
+
+See `/docs/definition-of-done.md` for the API definition of done.
