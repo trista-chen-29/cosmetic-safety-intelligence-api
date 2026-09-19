@@ -1,0 +1,31 @@
+[
+  {
+    "product_name": "L'Oréal True Match Foundation",
+    "product_type": "foundation",
+    "production_code": "20240115",
+    "opened_date": "2025-08-10",
+    "storage": {"humidity": "high", "temperature": "room", "sun_exposure": "low"}
+  },
+  {
+    "product_name": "Old Mascara",
+    "product_type": "mascara",
+    "production_code": "UNKNOWN",
+    "opened_date": "2024-01-01"
+  },
+  {
+    "product_name": "Fresh Lipstick",
+    "product_type": "lipstick",
+    "production_code": "20260301",
+    "opened_date": null
+  },
+  {
+    "product_name": "Sport Sunscreen",
+    "product_type": "sunscreen",
+    "production_code": "UNKNOWN"
+  },
+  {
+    "product_name": "Loose Powder",
+    "product_type": "powder",
+    "production_code": "24012"
+  }
+]
