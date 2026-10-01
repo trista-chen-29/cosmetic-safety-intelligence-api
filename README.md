@@ -129,21 +129,22 @@ Then open [http://127.0.0.1:5173](http://127.0.0.1:5173).
 `frontend/.env`:
 
 ```ini
-VITE_API_BASE_URL=http://127.0.0.1:8000
+VITE_API_BASE_URL=
 ```
 
-Do not put API keys in the frontend. The browser only needs the public backend URL.
+Leave this empty so the phone talks to the frontend, and Vite forwards analysis to the backend. Do not set `127.0.0.1` here — on iPhone that points at the phone, not your computer. Do not put API keys in the frontend.
 
 ### iPhone testing
 
 1. Start the backend with `--host 0.0.0.0`.
 2. Start the frontend with `npm run dev -- --host`.
-3. Find your computer’s local IP, for example `192.168.1.20`.
-4. Set `VITE_API_BASE_URL=http://192.168.1.20:8000` and restart Vite.
-5. On iPhone Safari, open `http://192.168.1.20:5173`.
-6. Add to Home Screen: **Share → Add to Home Screen**.
+3. Keep `VITE_API_BASE_URL` empty and restart Vite after changing it.
+4. Find your computer’s local IP, for example `172.16.227.24`.
+5. Put the iPhone on the **same Wi-Fi** as the computer.
+6. On iPhone Safari, open `http://YOUR_MAC_IP:5173`.
+7. Add to Home Screen: **Share → Add to Home Screen**.
 
-The camera button uses the native iPhone photo picker. Analysis still needs the backend, so the phone and computer must be on the same network.
+The camera button uses the native iPhone photo picker. If Safari says the server stopped responding, the phone cannot reach this computer — check Wi-Fi, the IP, and that both servers are running.
 
 If the backend is unavailable or you are offline, the app shows a clear error instead of a fake result.
 
